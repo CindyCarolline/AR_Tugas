@@ -1,0 +1,114 @@
+<!doctype HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <!-- Correcting zooming issue -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <!-- Library untuk VR membangun 3D -->
+    <script src="./js/aframe/aframe.min.js"></script>
+    <!-- Library untuk AR yang melakukan pengenalan marker dan menyematkan kamera-->
+    <script src="./js/arjs/aframe-ar.js"></script>
+    <title>WebAR: Multiple Marker</title>
+    <!-- include text geometry -->
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene embedded vr-mode-ui="enabled: false" arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;">
+
+        <!-- create assets -->
+        <a-assets timeout="900000">
+            <a-asset-item id="bullpuppy" src="./assets/that dog/bullpuppy/scene.gltf"></a-asset-item>
+            <a-asset-item id="chihuahua" src="./assets/that dog/chihuahua/scene.gltf"></a-asset-item>
+            <a-asset-item id="corgi" src="./assets/that dog/corgi/scene.gltf"></a-asset-item>
+            <a-asset-item id="dachshund" src="./assets/that dog/dachshund/scene.gltf"></a-asset-item>
+            <a-asset-item id="doberman" src="./assets/that dog/doberman/scene.gltf"></a-asset-item>
+            <a-asset-item id="dog" src="./assets/that dog/dog/scene.gltf"></a-asset-item>
+            <a-asset-item id="frenchbull" src="./assets/that dog/frenchbull/scene.gltf"></a-asset-item>
+            <a-asset-item id="labrador" src="./assets/that dog/labrador/scene.gltf"></a-asset-item>
+            <a-asset-item id="lowpoly" src="./assets/that dog/lowpoly/scene.gltf"></a-asset-item>
+            <a-asset-item id="puppy" src="./assets/that dog/puppy/scene.gltf"></a-asset-item>
+            <a-asset-item id="shiba" src="./assets/that dog/shiba/scene.gltf"></a-asset-item>
+            <a-asset-item id="skatebull" src="./assets/that dog/skatebull/scene.gltf"></a-asset-item>
+        </a-assets>
+        <!-- handle unknown marker -->
+        <a-marker type="unknown">
+            <a-box depth="1" height="1" width="1" position="0 0.5 0" material="opacity: 0.5; side:double; color:purple;"></a-box>
+        </a-marker>
+
+        handle hiro marker
+        <a-marker preset="hiro">
+            <a-entity gltf-model="#drone" animation-mixer></a-entity>
+        </a-marker>
+
+        <!-- handle kanji marker -->
+        <a-marker preset="kanji">
+            <a-entity gltf-model="#cookie"></a-entity>
+        </a-marker>
+
+        <!-- handle matrix marker -->
+        <a-marker type="barcode" value="21">
+            <a-gltf-model src="#bullpuppy" rotation="-90 0 0" position="0 0.5 0.5" scale="3 3 3"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="22">
+            <a-gltf-model src="#chihuahua" rotation="-90 0 0" position="0 0.5 0.5" scale="0.015 0.015 0.015"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="23">
+            <a-gltf-model src="#corgi" rotation="-90 0 0" position="0 0.5 0.5" scale="0.5 0.5 0.5"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="24">
+            <a-gltf-model src="#dachshund" rotation="-90 0 0" position="0 0.5 0.5" scale="0.5 0.5 0.5"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="25">
+            <a-gltf-model src="#doberman" rotation="-90 0 0" position="0 0.5 0.5" scale="2 2 2"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="26">
+            <a-gltf-model src="#dog" rotation="-90 0 0" position="0 0.5 0.5" scale="50 50 50"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="27">
+            <a-gltf-model src="#frenchbull" rotation="-90 0 0" position="0 0.5 0.5" scale="0.05 0.05 0.05"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="28">
+            <a-gltf-model src="#labrador" rotation="-90 0 0" position="0 0.5 0.5" scale="2 2 2"></a-gltf-model>
+          </a-marker>
+
+        <a-marker type="barcode" value="29">
+            <a-gltf-model src="#lowpoly" rotation="-270 180 0" position="0 0.5 0.5" scale="0.01 0.01 0.01"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="30">
+            <a-gltf-model src="#puppy" rotation="-90 0 0" position="0 0.5 0.5" scale="1 1 1"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="31">
+            <a-gltf-model src="#shiba" rotation="-90 0 0" position="0 1 0" scale="1 1 1"></a-gltf-model>
+        </a-marker>
+
+        <a-marker type="barcode" value="32">
+            <a-gltf-model src="#skatebull" rotation="-90 0 0" position="0 0.05 -0.01" scale="1 1 1"></a-gltf-model>
+        </a-marker>
+       
+        <!-- handle custom marker -->
+        <a-marker preset="custom" type="pattern" url="./marker/datamatrix-1234567890/marker-datamatrix-1234567890.patt">
+            <a-image src="#kio" rotation="-90 0 0" width="1" height="1" position="-1 0 -1"></a-image>
+        </a-marker>
+
+        <!-- handle custom marker -->
+        <a-marker preset="custom" type="pattern" url="./marker/unila/pattern-Unila-warna.patt">
+            <a-image src="#airterjun" rotation="-90 0 0" width="1" height="1" position="-1 0 -1"></a-image>
+        </a-marker>
+
+        <!-- add a simple camera -->
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+
+</html>
