@@ -1,0 +1,197 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+	const list = ["bullpuppy", "chihuahua", "corgi", "dachshund", "doberman", "dog", "frenchbull", "labrador", "lowpoly", "puppy", "shiba", "skatebull"];
+	const visibles = [false, false, false, false, false, false, false, false, false, ,false, true];
+	const setVisible = (button, entities, visible) => {
+	  if (visible) {
+	    button.classList.add("selected");
+	  } else {
+	    button.classList.remove("selected");
+	  }
+	  entities.forEach((entity) => {
+	    entity.setAttribute("visible", visible);
+	  });
+	}
+	list.forEach((item, index) => {
+	  const button = document.querySelector("#" + item);
+	  const entities = document.querySelectorAll("." + item + "-entity");
+	  setVisible(button, entities, visibles[index]);
+	  button.addEventListener('click', () => {
+	    visibles[index] = !visibles[index];
+	    setVisible(button, entities, visibles[index]);
+	  });
+	});
+      })
+    </script>
+    <style>
+      body {
+        margin: 0;
+      }
+      .example-container {
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      .options-panel {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 2;
+      }
+      .options-panel img {
+	border: solid 3px;
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	cursor: pointer;
+      }
+      .options-panel img.selected {
+	border-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example-container">
+      <div class="options-panel">
+        <img id="bullpuppy" src="./assets/that dog/bullpuppy/scene.png"></img>
+        <img id="chihuahua" src="./assets/that dog/chihuahua/scene.png"></img>
+        <img id="corgi" src="./assets/that dog/corgi/scene.png"></img>
+        <img id="dachshund" src="./assets/that dog/dachshund/scene.png"></img>
+        <img id="doberman" src="./assets/that dog/doberman/scene.png"></img>
+        <img id="dog" src="./assets/that dog/dog/scene.png"></img>
+        <img id="frenchbull" src="./assets/that dog/frenchbull/scene.png"></img>
+        <img id="labrador" src="./assets/that dog/labrador/scene.png"></img>
+        <img id="lowpoly" src="./assets/that dog/lowpoly/scene.png"></img>
+        <img id="puppy" src="./assets/that dog/puppy/scene.png"></img>
+        <img id="shiba" src="./assets/that dog/shiba/scene.png"></img>
+        <img id="skatebull" src="./assets/that dog/skatebull/scene.png"></img>
+      </div>
+      <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+        <a-assets>
+          <a-asset-item id="headModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/face-tracking/assets/sparkar/headOccluder.glb"></a-asset-item>
+          <a-asset-item id="bullpuppyModel" src="./assets/that dog/bullpuppy/scene.gltf"></a-asset-item>
+          <a-asset-item id="chihuahuaModel" src="./assets/that dog/chihuahua/scene.gltf"></a-asset-item>
+          <a-asset-item id="corgiModel" src="./assets/that dog/corgi/scene.gltf"></a-asset-item>
+          <a-asset-item id="dachshundModel" src="./assets/that dog/dachshund/scene.gltf"></a-asset-item>
+          <a-asset-item id="dobermanModel" src="./assets/that dog/doberman/scene.gltf"></a-asset-item>
+          <a-asset-item id="dogModel" src="./assets/that dog/dog/scene.gltf"></a-asset-item>
+          <a-asset-item id="frenchbullModel" src="./assets/that dog/frenchbull/scene.gltf"></a-asset-item>
+          <a-asset-item id="labradorModel" src="./assets/that dog/labrador/scene.gltf"></a-asset-item>
+          <a-asset-item id="lowpolyModel" src="./assets/that dog/lowpoly/scene.gltf"></a-asset-item>
+          <a-asset-item id="puppyModel" src="./assets/that dog/puppy/scene.gltf"></a-asset-item>
+          <a-asset-item id="shibaModel" src="./assets/that dog/shiba/scene.gltf"></a-asset-item>
+          <a-asset-item id="skatebullModel" src="./assets/that dog/skatebull/scene.gltf"></a-asset-item>
+        </a-assets>
+        <a-camera active="false" position="0 0 0"></a-camera>
+	<!-- head occluder -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+	  <a-gltf-model mindar-face-occluder position="0 -0.3 0.15"rotation="0 0 0" scale="0.065 0.065 0.065" src="#headModel"></a-gltf-model>
+        </a-entity>
+
+        <!-- bullpuppy -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="1 1 1" src="#bullpuppyModel" class="bullpuppy-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="1 1 1" src="#bullpuppyModel" class="bullpuppy-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        
+        <!-- chihuahua -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -0 0" position="0.15 -0.45 0.3" scale="0.003 0.003 0.003" src="#chihuahuaModel" class="chihuahua-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.003 0.003 0.003" src="#chihuahuaModel" class="chihuahua-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- corgi -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="0.1 0.1 0.1" src="#corgiModel" class="corgi-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.1 0.1 0.1" src="#corgiModel" class="corgi-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- dachshund -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -0 0" position="0.15 -0.25 0.4" scale="0.1 0.1 0.1" src="#dachshundModel" class="dachshund-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.25 0.4" scale="0.1 0.1 0.1" src="#dachshundModel" class="dachshund-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- doberman -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="0.4 0.4 0.4" src="#dobermanModel" class="doberman-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.4 0.4 0.4" src="#dobermanModel" class="doberman-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- dog -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 45 0" position="0.15 -0.45 0.5" scale="9 9 9" src="#dogModel" class="dog-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 45 0" position="-0.15 -0.45 0.5" scale="9 9 9" src="#dogModel" class="dog-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- frenchbull -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.45 0.3" scale="0.0085 0.0085 0.0085" src="#frenchbullModel" class="frenchbull-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.0085 0.0085 0.0085" src="#frenchbullModel" class="frenchbull-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- labrador -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -90 0" position="0.15 -0.35 0.5" scale="0.4 0.4 0.4" src="#labradorModel" class="labrador-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -90 0" position="-0.15 -0.35 0.5" scale="0.4 0.4 0.4" src="#labradorModel" class="labrador-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+         <!-- lowpoly -->
+         <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="-0.1 -180 0" position="0.15 -0.35 0.3" scale="0.0015 0.0015 0.0015" src="#lowpolyModel" class="lowpoly-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -180 0" position="-0.15 -0.35 0.3" scale="0.0015 0.0015 0.0015" src="#lowpolyModel" class="lowpoly-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- puppy -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+            <a-gltf-model rotation="0.1 -0 0" position="0.15 -0.45 0.3" scale="0.2 0.2 0.2" src="#puppyModel" class="puppy-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+            <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.45 0.3" scale="0.2 0.2 0.2" src="#puppyModel" class="puppy-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- shiba -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+	        <a-gltf-model rotation="-0.1 -0 0" position="0.15 -0.25 0.3" scale="0.15 0.15 0.15" src="#shibaModel" class="shiba-entity" visible="false"></a-gltf-model>
+        </a-entity>
+        <a-entity mindar-face-target="anchorIndex: 356">
+	        <a-gltf-model rotation="0.1 -0 0" position="-0.15 -0.25 0.3" scale="0.15 0.15 0.15" src="#shibaModel" class="shiba-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+        <!-- skatebull -->
+        <a-entity mindar-face-target="anchorIndex: 127">
+	        <a-gltf-model rotation="0.1 90 0" position="0.15 -0.25 0.3" scale="0.15 0.15 0.15" src="#skatebullModel" class="skatebull-entity" visible="false"></a-gltf-model>
+        </a-entity> 
+        <a-entity mindar-face-target="anchorIndex: 356">
+	        <a-gltf-model rotation="0.1 90 0" position="-0.15 -0.25 0.3" scale="0.15 0.15 0.15" src="#skatebullModel" class="skatebull-entity" visible="false"></a-gltf-model>
+        </a-entity>
+
+      </a-scene>
+    </div>
+  </body>
+</html>
