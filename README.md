@@ -10,6 +10,7 @@
         <li> <a href="./face-tracking.html">Face Tracking</a> </li>
         <li> <a href="./image-tracking.html">Image Tracking</a> </li>
         <li> <a href="./cardname.html">Card Name</a> </li>
+        <li> <a href="./sitemap.html">Website AR</a></li>
         </ol>
     </body>
 </html>
