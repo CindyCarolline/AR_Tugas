@@ -111,7 +111,7 @@ li a {
     display: none;
 }
 
-.about {
+.about, .section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
